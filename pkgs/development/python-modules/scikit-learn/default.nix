@@ -4,12 +4,12 @@
 , fetchPypi
 
 # build-system
-, cython
+, cython_3
 , gfortran
 , numpy
-, oldest-supported-numpy
 , scipy
 , setuptools
+, wheel
 
 # native dependencies
 , glibcLocales
@@ -27,7 +27,7 @@ buildPythonPackage rec {
   version = "1.4.1.post1";
   pyproject = true;
 
-  disabled = pythonOlder "3.6";
+  disabled = pythonOlder "3.9";
 
   src = fetchPypi {
     inherit pname version;
@@ -42,18 +42,24 @@ buildPythonPackage rec {
   ];
 
   nativeBuildInputs = [
-    cython
     gfortran
+  ];
+
+  build-system = [
+    cython_3
     numpy
-    oldest-supported-numpy
     scipy
     setuptools
+    wheel
   ];
 
   propagatedBuildInputs = [
+    numpy.blas
+  ];
+
+  dependencies = [
     joblib
     numpy
-    numpy.blas
     scipy
     threadpoolctl
   ];
