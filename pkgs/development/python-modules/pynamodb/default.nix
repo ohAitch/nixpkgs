@@ -3,11 +3,11 @@
 , botocore
 , buildPythonPackage
 , fetchFromGitHub
+, pytest-env
 , pytest-mock
 , pytestCheckHook
-, python-dateutil
 , pythonOlder
-, requests
+, setuptools
 , typing-extensions
 }:
 
@@ -25,23 +25,27 @@ buildPythonPackage rec {
     hash = "sha256-Ag/ivZ2SDYX0kwXbExt3kE/pMJgfoGc6gWoy+Rr6GTw=";
   };
 
-  propagatedBuildInputs = [
-    python-dateutil
+  build-system = [
+    setuptools
+  ];
+
+  dependencies = [
     botocore
-  ] ++ lib.optionals (pythonOlder "3.8") [
+  ] ++ lib.optionals (pythonOlder "3.11") [
     typing-extensions
   ];
 
-  passthru.optional-dependencies = {
+  optional-dependencies = {
     signal = [
       blinker
     ];
   };
 
   nativeCheckInputs = [
+    pytest-env
     pytest-mock
     pytestCheckHook
-  ] ++ passthru.optional-dependencies.signal;
+  ] ++ optional-dependencies.signal;
 
   pythonImportsCheck = [
     "pynamodb"
@@ -57,6 +61,9 @@ buildPythonPackage rec {
     "test_sign_request"
     "test_table_integration"
     "test_transact"
+    # require a local dynamodb instance
+    "test_create_table"
+    "test_create_table__incompatible_indexes"
   ];
 
   meta = with lib; {
