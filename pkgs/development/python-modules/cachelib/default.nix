@@ -27,6 +27,7 @@ buildPythonPackage rec {
   disabledTestPaths = [
     # requires set up local server
     "tests/test_dynamodb_cache.py"
+    "tests/test_mongodb_cache.py"
   ];
 
   pythonImportsCheck = [ "cachelib" ];
