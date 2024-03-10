@@ -4,8 +4,10 @@
 , pythonOlder
 , poetry-core
 , textfsm
+, invoke
 , pytestCheckHook
 , ruamel-yaml
+, toml
 , yamllint
 }:
 
@@ -32,8 +34,10 @@ buildPythonPackage rec {
   ];
 
   nativeCheckInputs = [
+    invoke
     pytestCheckHook
     ruamel-yaml
+    toml
     yamllint
   ];
 
