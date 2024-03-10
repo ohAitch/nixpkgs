@@ -1,6 +1,7 @@
 { lib
 , buildPythonPackage
 , fetchPypi
+, poetry-core
 , pytestCheckHook
 , pythonOlder
 }:
@@ -8,7 +9,7 @@
 buildPythonPackage rec {
   pname = "shortuuid";
   version = "1.0.12";
-  format = "setuptools";
+  pyproject = true;
 
   disabled = pythonOlder "3.7";
 
@@ -16,6 +17,10 @@ buildPythonPackage rec {
     inherit pname version;
     hash = "sha256-w58bNIs8HpsRWpVLM7dsjFItLRd6nSCs27INJPrDzP0=";
   };
+
+  build-system = [
+    poetry-core
+  ];
 
   nativeCheckInputs = [
     pytestCheckHook
