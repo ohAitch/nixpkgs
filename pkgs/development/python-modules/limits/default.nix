@@ -37,7 +37,7 @@ buildPythonPackage rec {
     postFetch = ''
       rm "$out/limits/_version.py"
     '';
-    hash = "sha256-LnQQCxleddXaG4NlpKUBYEGLYbCtmIzi/AVIB5ApAwk=";
+    hash = "sha256-X4nf9ifhJjTNKnQuAxRNK9j/MzfAC58kv+19zMWtKg8=";
   };
 
   postPatch = ''
