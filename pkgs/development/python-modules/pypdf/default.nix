@@ -1,6 +1,7 @@
 { lib
 , buildPythonPackage
 , fetchFromGitHub
+, fetchpatch2
 , pythonOlder
 
 # build-system
@@ -37,6 +38,17 @@ buildPythonPackage rec {
     fetchSubmodules = true;
     hash = "sha256-Z3flDC102FwEaNtef0YAfmAFSxpimQNyxt9tRfpKueg=";
   };
+
+  patches = [
+    (fetchpatch2 {
+      # add missing test marker on networked test
+      url = "https://github.com/py-pdf/pypdf/commit/f43268734a529d4098e6258bf346148fd24c54f0.patch";
+      includes = [
+        "tests/test_generic.py"
+      ];
+      hash = "sha256-Ow32UB4crs3OgT+AmA9TNmcO5Y9SoSahybzD3AmWmVk=";
+    })
+  ];
 
   outputs = [
     "out"
