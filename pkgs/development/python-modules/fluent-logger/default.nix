@@ -1,24 +1,41 @@
-{ lib, buildPythonPackage, fetchPypi, msgpack }:
+{ lib
+, buildPythonPackage
+, fetchFromGitHub
+
+# build-system
+, hatchling
+
+# dependencies
+, msgpack
+
+# tests
+, pytestCheckHook,
+}:
 
 buildPythonPackage rec {
   pname = "fluent-logger";
   version = "0.11.0";
-  format = "setuptools";
+  pyproject = true;
 
-  src = fetchPypi {
-    inherit pname version;
-    sha256 = "sha256-gTz0S3CtIE98Fht5YEiSyJvJLfY/zRMvPGc0urVuZSc=";
+  src = fetchFromGitHub {
+    owner = "fluent";
+    repo = "fluent-logger-python";
+    rev = "refs/tags/v${version}";
+    hash = "sha256-PfyjJZT5K/IMsyyWNZdh/CZf+uZHeJGfhyAPuu0IhJk=";
   };
 
-  prePatch = ''
-    substituteInPlace setup.py \
-      --replace "msgpack<1.0.0" "msgpack"
-  '';
+  build-system  = [
+    hatchling
+  ];
 
-  propagatedBuildInputs = [ msgpack ];
+  dependencies = [
+    msgpack
+  ];
 
-  # Tests fail because absent in package
-  doCheck = false;
+  nativeCheckInputs = [
+    pytestCheckHook
+  ];
+
   pythonImportsCheck = [
     "fluent"
     "fluent.event"
