@@ -1,7 +1,8 @@
 { lib
-, fetchPypi
+, fetchFromGitHub
 , buildPythonPackage
 , parameterized
+, pygments
 , pythonOlder
 , pytestCheckHook
 }:
@@ -13,9 +14,11 @@ buildPythonPackage rec {
 
   disabled = pythonOlder "3.7";
 
-  src = fetchPypi {
-    inherit pname version;
-    hash = "sha256-vQ54it2bRHjRnseS9tX7kIog5wq/5hGT8pF4xV062+k=";
+  src = fetchFromGitHub {
+    owner = "miyuchina";
+    repo = "mistletoe";
+    rev = "refs/tags/v${version}";
+    hash = "sha256-MMBfH4q5AtC/azQUj1a1tMz1MdUf4ad5/tl7lcQCTOw=";
   };
 
   pythonImportsCheck = [
@@ -24,6 +27,7 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [
     parameterized
+    pygments
     pytestCheckHook
   ];
 
