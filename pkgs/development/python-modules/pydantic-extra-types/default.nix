@@ -3,8 +3,10 @@
 , fetchFromGitHub
 , hatchling
 , pydantic
+, pendulum
 , phonenumbers
 , pycountry
+, python-ulid
 , pytestCheckHook
 }:
 
@@ -30,8 +32,10 @@ buildPythonPackage rec {
 
   passthru.optional-dependencies = {
     all = [
+      pendulum
       phonenumbers
       pycountry
+      python-ulid
     ];
   };
 
