@@ -23,6 +23,7 @@
 , fastapi
 , gevent
 , httpx
+, psutil
 , pytest-asyncio
 , pytestCheckHook
 , redis
@@ -67,6 +68,7 @@ buildPythonPackage rec {
     fastapi
     gevent
     httpx
+    psutil
     pytest-asyncio
     pytestCheckHook
     redis
@@ -95,6 +97,8 @@ buildPythonPackage rec {
     "test_truesendall_with_dump_from_recording"
     "test_asyncio_record_replay"
     "test_gethostbyname"
+    # httpx read failure
+    "test_no_dangling_fds"
   ];
 
   disabledTestPaths = lib.optionals stdenv.isDarwin [
