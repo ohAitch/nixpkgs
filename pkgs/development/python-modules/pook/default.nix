@@ -6,6 +6,7 @@
 , hatchling
 , jsonschema
 , pytest-asyncio
+, pytest-httpbin
 , pytestCheckHook
 , pythonOlder
 , requests
@@ -40,6 +41,7 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [
     pytest-asyncio
+    pytest-httpbin
     pytestCheckHook
   ];
 
