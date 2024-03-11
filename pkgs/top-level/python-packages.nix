@@ -5953,6 +5953,8 @@ self: super: with self; {
 
   josepy = callPackage ../development/python-modules/josepy { };
 
+  joserfc = callPackage ../development/python-modules/joserfc { };
+
   journalwatch = callPackage ../tools/system/journalwatch {
     inherit (self) systemd pytest;
   };
