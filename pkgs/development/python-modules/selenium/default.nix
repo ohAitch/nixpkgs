@@ -27,7 +27,7 @@ buildPythonPackage rec {
     repo = "selenium";
     # check if there is a newer tag with or without -python suffix
     rev = "refs/tags/selenium-${version}";
-    hash = "sha256-DJBrZXW2InELp++5e843BK4IcdjJ/KnWHiHesEPDDrA=";
+    hash = "sha256-1C9Epsk9rFlShxHGGzbWl6smrMzPn2h3yCWlzUIMpY8=";
   };
 
   preConfigure = ''
